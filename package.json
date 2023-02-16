@@ -5,7 +5,7 @@
   "scripts": {
     "start-fe": "vite",
     "start-bff": "npx ts-node src/bff/index.ts",
-    "start": "start.sh",
+    "start": "start.bat",
     "build": "vue-tsc && vite build"
   },
   "dependencies": {
