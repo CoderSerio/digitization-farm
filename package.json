@@ -3,7 +3,9 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
-    "start": "npx ts-node ./src/bff/index.ts && vite",
+    "start-fe": "vite",
+    "start-bff": "npx ts-node src/bff/index.ts",
+    "start": "start.sh",
     "build": "vue-tsc && vite build"
   },
   "dependencies": {
