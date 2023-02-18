@@ -13,8 +13,8 @@ instance.interceptors.response.use(
 )
 
 const request = {
-  get: async (url: string, params: any = {}) => {
-    const res = await instance.get(url, { params: params })
+  get: (url: string, params: any = {}) => {
+    const res = instance.get(url, { params: params })
     return res
   },
   post: async (url: string, data: any = '') => {

@@ -1,9 +1,20 @@
 <script setup lang="ts">
-console.log('hello world');
+import { ref, onMounted } from 'vue'
+import InfoCard from './components/info-card.vue'
+import LineChart from './components/line-chart.vue'
 </script>
 
 <template>
-  这是analyse
+  <div class="wrapper">
+    <div class="left">
+      <InfoCard />
+    </div>
+    <LineChart />
+  </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.wrapper {
+  display: flex;
+}
+</style>

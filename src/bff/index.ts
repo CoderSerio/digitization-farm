@@ -1,7 +1,7 @@
-const request = require('request')
 import express from 'express'
 import mockDataList from './mock/data-list.json'
 
+//中间层
 const app = express()
 const PORT = 3000
 
@@ -17,7 +17,7 @@ app.get('/', (req, res) => {
   res.send('Hello world')
 })
 
-app.get('/mock/data-list', (req, res) => {
+app.get('/data-list', (req, res) => {
   console.log('受到了请求', req.url)
   res.send(mockDataList)
 })

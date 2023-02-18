@@ -1,13 +1,9 @@
 import { VueElement } from 'vue'
+// vue-router自己提供的
 import { createRouter, createWebHistory } from 'vue-router'
+import { Route } from '@type/mock'
 
-interface Route {
-  path: string
-  name: string
-  component: VueElement | (() => Promise<any>)
-}
-
-const routes: Array<Route> = [
+const routes = [
   {
     path: '/',
     name: 'DataList',

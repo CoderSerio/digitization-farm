@@ -5,9 +5,9 @@ import 'element-plus/dist/index.css'
 import router from './routes'
 import App from './App.vue'
 
-const app = createApp(App)
+const vue = createApp(App)
 
-app.use(ElementPlus)
-app.use(router)
+vue.use(ElementPlus)
+vue.use(router)
 
-app.mount('#app')
+vue.mount('#app')

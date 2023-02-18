@@ -2,8 +2,6 @@
 console.log('hello world')
 </script>
 
-<template>
-  1231231
-</template>
+<template>ThreeJS 3D部分暂时不做</template>
 
 <style scoped></style>
