@@ -1,9 +1,9 @@
 import { VueElement } from 'vue'
 // vue-router自己提供的
 import { createRouter, createWebHistory } from 'vue-router'
-import { Route } from '@type/mock'
+import { Route } from '@/types/common'
 
-const routes = [
+const routes: Array<Route> = [
   {
     path: '/',
     name: 'DataList',

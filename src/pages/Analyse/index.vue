@@ -9,7 +9,9 @@ import LineChart from './components/line-chart.vue'
     <div class="left">
       <InfoCard />
     </div>
-    <LineChart />
+    <div class="right">
+      <LineChart />
+    </div>
   </div>
 </template>
 
