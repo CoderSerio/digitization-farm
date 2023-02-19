@@ -1,5 +1,8 @@
 import express from 'express'
+
+// mock数据，和后端对接后移除
 import mockDataList from './mock/data-list.json'
+import mockAnalyse from './mock/analyse.json'
 
 //中间层
 const app = express()
@@ -17,9 +20,17 @@ app.get('/', (req, res) => {
   res.send('Hello world')
 })
 
+// 获取列表数据
 app.get('/data-list', (req, res) => {
-  console.log('受到了请求', req.url)
+  console.log('正在查询列表数据...', req.url)
+  // mock数据，和后端完成对接后移除
   res.send(mockDataList)
+})
+
+app.get('/analyse', (req, res) => {
+  console.log('正在生物详细信息...', req.url)
+  // mock数据，和后端对接后移除
+  res.send(mockAnalyse)
 })
 
 app.listen(PORT, () => {

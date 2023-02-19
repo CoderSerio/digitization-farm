@@ -17,6 +17,7 @@ import Sidebar from '../common/sidebar.vue'
 <style scoped>
 .wrapper {
   display: flex;
+  min-width: 80px;
   justify-content: space-between;
   align-items: center;
 }

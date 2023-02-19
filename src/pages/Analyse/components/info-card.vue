@@ -23,27 +23,28 @@ onMounted(() => {
       <template #content>
         <div class="flex items-center">
           <span class="text-large font-600 mr-3"> 详细信息 </span>
-          <span class="text-sm mr-2" style="color: var(--el-text-color-regular)">
+          <span
+            class="text-sm mr-2"
+            style="color: var(--el-text-color-regular)"
+          >
           </span>
           <el-tag> #{{ queryPair?.id }} </el-tag>
         </div>
       </template>
-      <!-- <template #extra>
-            <div class="flex items-center">
-              <el-button>下载</el-button>
-            </div>
-          </template> -->
 
       <el-descriptions :column="3" size="small" class="mt-4">
-        <el-descriptions-item label="Username">kooriookami</el-descriptions-item>
-        <el-descriptions-item label="Telephone">18100000000
+        <el-descriptions-item label="Username"
+          >kooriookami</el-descriptions-item
+        >
+        <el-descriptions-item label="Telephone"
+          >18100000000
         </el-descriptions-item>
         <el-descriptions-item label="Place">Suzhou</el-descriptions-item>
         <el-descriptions-item label="Remarks">
           <el-tag size="small">School</el-tag>
         </el-descriptions-item>
         <el-descriptions-item label="Address">
-          No.1188, Wuzhong Avenue, Wuzhong District, Suzhou, Jiangsu Province
+          一袋米抗几楼？一袋米抗两楼！苦苦油泥！
         </el-descriptions-item>
       </el-descriptions>
     </el-page-header>

@@ -47,6 +47,5 @@ a {
   text-decoration: none;
   color: #333;
   font-family: sans-serif;
-  font-size: 12px;
 }
 </style>
