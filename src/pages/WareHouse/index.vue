@@ -1,6 +1,11 @@
 <script setup lang="ts">
+import { getWarehouseData } from '@/apis/getData'
 import Sidebar from '@page/Common/sidebar.vue'
-console.log('hello world')
+import { onMounted } from 'vue'
+onMounted(async () => {
+  const res = await getWarehouseData()
+  console.log(res)
+})
 </script>
 
 <template>
@@ -8,9 +13,7 @@ console.log('hello world')
     <div class="left">
       <Sidebar />
     </div>
-    <div class="right">
-      3d部分暂时不做
-    </div>
+    <div class="right">3d部分暂时不做</div>
   </div>
 </template>
 

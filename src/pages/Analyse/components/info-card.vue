@@ -28,7 +28,7 @@ onMounted(() => {
             style="color: var(--el-text-color-regular)"
           >
           </span>
-          <el-tag> #{{ queryPair?.id }} </el-tag>
+          <el-tag> #{{ queryPair?.animalId }} </el-tag>
         </div>
       </template>
 
@@ -44,7 +44,7 @@ onMounted(() => {
           <el-tag size="small">School</el-tag>
         </el-descriptions-item>
         <el-descriptions-item label="Address">
-          一袋米抗几楼？一袋米抗两楼！苦苦油泥！
+          海为什么是蓝色的？ 因为鱼会吐泡泡————blue blue blue~
         </el-descriptions-item>
       </el-descriptions>
     </el-page-header>
