@@ -42,10 +42,4 @@ const handleClose = (key: string, keyPath: string[]) => {
 .el-menu-item {
   text-align: center;
 }
-
-a {
-  text-decoration: none;
-  color: #333;
-  font-family: sans-serif;
-}
 </style>
