@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bbqd.farm.mapper.AntibioticMapper">
+  <resultMap id="BaseResultMap" type="com.bbqd.farm.model.Antibiotic">
+    <id column="antibiotic_id" jdbcType="BIGINT" property="antibioticId" />
+    <result column="antibiotic_name" jdbcType="VARCHAR" property="antibioticName" />
+    <result column="species" jdbcType="VARCHAR" property="species" />
+    <result column="growth_stage" jdbcType="TINYINT" property="growthStage" />
+    <result column="dose" jdbcType="INTEGER" property="dose" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    antibiotic_id, antibiotic_name, species, growth_stage, dose
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from antibiotic
+    where antibiotic_id = #{antibioticId,jdbcType=BIGINT}
+  </select>
+  <select id="selectBySpeciesAndGrowthStage" resultType="com.bbqd.farm.model.Antibiotic">
+    select
+    <include refid="Base_Column_List" />
+    from antibiotic
+    where species = #{species,jdbcType=VARCHAR} and growth_stage = #{growthStage,jdbcType=TINYINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from antibiotic
+    where antibiotic_id = #{antibioticId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.bbqd.farm.model.Antibiotic">
+    insert into antibiotic (antibiotic_id, antibiotic_name, species, 
+      growth_stage, dose)
+    values (#{antibioticId,jdbcType=BIGINT}, #{antibioticName,jdbcType=VARCHAR}, #{species,jdbcType=VARCHAR}, 
+      #{growthStage,jdbcType=TINYINT}, #{dose,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bbqd.farm.model.Antibiotic">
+    insert into antibiotic
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="antibioticId != null">
+        antibiotic_id,
+      </if>
+      <if test="antibioticName != null">
+        antibiotic_name,
+      </if>
+      <if test="species != null">
+        species,
+      </if>
+      <if test="growthStage != null">
+        growth_stage,
+      </if>
+      <if test="dose != null">
+        dose,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="antibioticId != null">
+        #{antibioticId,jdbcType=BIGINT},
+      </if>
+      <if test="antibioticName != null">
+        #{antibioticName,jdbcType=VARCHAR},
+      </if>
+      <if test="species != null">
+        #{species,jdbcType=VARCHAR},
+      </if>
+      <if test="growthStage != null">
+        #{growthStage,jdbcType=TINYINT},
+      </if>
+      <if test="dose != null">
+        #{dose,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bbqd.farm.model.Antibiotic">
+    update antibiotic
+    <set>
+      <if test="antibioticName != null">
+        antibiotic_name = #{antibioticName,jdbcType=VARCHAR},
+      </if>
+      <if test="species != null">
+        species = #{species,jdbcType=VARCHAR},
+      </if>
+      <if test="growthStage != null">
+        growth_stage = #{growthStage,jdbcType=TINYINT},
+      </if>
+      <if test="dose != null">
+        dose = #{dose,jdbcType=INTEGER},
+      </if>
+    </set>
+    where antibiotic_id = #{antibioticId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bbqd.farm.model.Antibiotic">
+    update antibiotic
+    set antibiotic_name = #{antibioticName,jdbcType=VARCHAR},
+      species = #{species,jdbcType=VARCHAR},
+      growth_stage = #{growthStage,jdbcType=TINYINT},
+      dose = #{dose,jdbcType=INTEGER}
+    where antibiotic_id = #{antibioticId,jdbcType=BIGINT}
+  </update>
+</mapper>

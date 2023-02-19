@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bbqd.farm.mapper.FeedLogMapper">
+  <resultMap id="BaseResultMap" type="com.bbqd.farm.model.FeedLog">
+    <id column="feed_log_id" jdbcType="BIGINT" property="feedLogId" />
+    <result column="date" jdbcType="BIGINT" property="date" />
+    <result column="feed_type" jdbcType="VARCHAR" property="feedType" />
+    <result column="daily_use" jdbcType="INTEGER" property="dailyUse" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    feed_log_id, date, feed_type, daily_use
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from feed_log
+    where feed_log_id = #{feedLogId,jdbcType=BIGINT}
+  </select>
+  <select id="selectByPrimaryKeyAndDate" resultType="com.bbqd.farm.model.FeedLog">
+    select
+    <include refid="Base_Column_List" />
+    from feed_log
+    where feed_log_id = #{feedLogId,jdbcType=BIGINT} and `date` = #{date,jdbcType=BIGINT}
+  </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from feed_log
+    where feed_log_id = #{feedLogId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.bbqd.farm.model.FeedLog">
+    insert into feed_log (feed_log_id, date, feed_type, 
+      daily_use)
+    values (#{feedLogId,jdbcType=BIGINT}, #{date,jdbcType=BIGINT}, #{feedType,jdbcType=VARCHAR}, 
+      #{dailyUse,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bbqd.farm.model.FeedLog">
+    insert into feed_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="feedLogId != null">
+        feed_log_id,
+      </if>
+      <if test="date != null">
+        date,
+      </if>
+      <if test="feedType != null">
+        feed_type,
+      </if>
+      <if test="dailyUse != null">
+        daily_use,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="feedLogId != null">
+        #{feedLogId,jdbcType=BIGINT},
+      </if>
+      <if test="date != null">
+        #{date,jdbcType=BIGINT},
+      </if>
+      <if test="feedType != null">
+        #{feedType,jdbcType=VARCHAR},
+      </if>
+      <if test="dailyUse != null">
+        #{dailyUse,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bbqd.farm.model.FeedLog">
+    update feed_log
+    <set>
+      <if test="date != null">
+        date = #{date,jdbcType=BIGINT},
+      </if>
+      <if test="feedType != null">
+        feed_type = #{feedType,jdbcType=VARCHAR},
+      </if>
+      <if test="dailyUse != null">
+        daily_use = #{dailyUse,jdbcType=INTEGER},
+      </if>
+    </set>
+    where feed_log_id = #{feedLogId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bbqd.farm.model.FeedLog">
+    update feed_log
+    set date = #{date,jdbcType=BIGINT},
+      feed_type = #{feedType,jdbcType=VARCHAR},
+      daily_use = #{dailyUse,jdbcType=INTEGER}
+    where feed_log_id = #{feedLogId,jdbcType=BIGINT}
+  </update>
+</mapper>

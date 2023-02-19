@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bbqd.farm.mapper.StockMapper">
+  <resultMap id="BaseResultMap" type="com.bbqd.farm.model.Stock">
+    <id column="type" jdbcType="VARCHAR" property="type" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="total" jdbcType="INTEGER" property="total" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    type, name, total
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from stock
+    where type = #{type,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultType="com.bbqd.farm.model.Stock">
+    select
+    <include refid="Base_Column_List" />
+    from stock
+  </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from stock
+    where type = #{type,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bbqd.farm.model.Stock">
+    insert into stock (type, name, total
+      )
+    values (#{type,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{total,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.bbqd.farm.model.Stock">
+    insert into stock
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="type != null">
+        type,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="total != null">
+        total,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="total != null">
+        #{total,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bbqd.farm.model.Stock">
+    update stock
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="total != null">
+        total = #{total,jdbcType=INTEGER},
+      </if>
+    </set>
+    where type = #{type,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bbqd.farm.model.Stock">
+    update stock
+    set name = #{name,jdbcType=VARCHAR},
+      total = #{total,jdbcType=INTEGER}
+    where type = #{type,jdbcType=VARCHAR}
+  </update>
+</mapper>

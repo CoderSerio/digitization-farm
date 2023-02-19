@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bbqd.farm.mapper.AnimalMapper">
+  <resultMap id="BaseResultMap" type="com.bbqd.farm.model.Animal">
+    <id column="animal_id" jdbcType="BIGINT" property="animalId" />
+    <result column="species" jdbcType="VARCHAR" property="species" />
+    <result column="growth_stage" jdbcType="TINYINT" property="growthStage" />
+    <result column="health_status" jdbcType="TINYINT" property="healthStatus" />
+    <result column="farm" jdbcType="VARCHAR" property="farm" />
+    <result column="feed_log_id" jdbcType="BIGINT" property="feedLogId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    animal_id, species, growth_stage, health_status, farm, feed_log_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from animal
+    where animal_id = #{animalId,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from animal
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from animal
+    where animal_id = #{animalId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.bbqd.farm.model.Animal">
+    insert into animal (animal_id, species, growth_stage, 
+      health_status, farm, feed_log_id
+      )
+    values (#{animalId,jdbcType=BIGINT}, #{species,jdbcType=VARCHAR}, #{growthStage,jdbcType=TINYINT}, 
+      #{healthStatus,jdbcType=TINYINT}, #{farm,jdbcType=VARCHAR}, #{feedLogId,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.bbqd.farm.model.Animal">
+    insert into animal
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="animalId != null">
+        animal_id,
+      </if>
+      <if test="species != null">
+        species,
+      </if>
+      <if test="growthStage != null">
+        growth_stage,
+      </if>
+      <if test="healthStatus != null">
+        health_status,
+      </if>
+      <if test="farm != null">
+        farm,
+      </if>
+      <if test="feedLogId != null">
+        feed_log_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="animalId != null">
+        #{animalId,jdbcType=BIGINT},
+      </if>
+      <if test="species != null">
+        #{species,jdbcType=VARCHAR},
+      </if>
+      <if test="growthStage != null">
+        #{growthStage,jdbcType=TINYINT},
+      </if>
+      <if test="healthStatus != null">
+        #{healthStatus,jdbcType=TINYINT},
+      </if>
+      <if test="farm != null">
+        #{farm,jdbcType=VARCHAR},
+      </if>
+      <if test="feedLogId != null">
+        #{feedLogId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bbqd.farm.model.Animal">
+    update animal
+    <set>
+      <if test="species != null">
+        species = #{species,jdbcType=VARCHAR},
+      </if>
+      <if test="growthStage != null">
+        growth_stage = #{growthStage,jdbcType=TINYINT},
+      </if>
+      <if test="healthStatus != null">
+        health_status = #{healthStatus,jdbcType=TINYINT},
+      </if>
+      <if test="farm != null">
+        farm = #{farm,jdbcType=VARCHAR},
+      </if>
+      <if test="feedLogId != null">
+        feed_log_id = #{feedLogId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where animal_id = #{animalId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bbqd.farm.model.Animal">
+    update animal
+    set species = #{species,jdbcType=VARCHAR},
+      growth_stage = #{growthStage,jdbcType=TINYINT},
+      health_status = #{healthStatus,jdbcType=TINYINT},
+      farm = #{farm,jdbcType=VARCHAR},
+      feed_log_id = #{feedLogId,jdbcType=BIGINT}
+    where animal_id = #{animalId,jdbcType=BIGINT}
+  </update>
+</mapper>
