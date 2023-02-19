@@ -60,7 +60,7 @@ onMounted(() => {
 
 <style scoped>
 #echart {
-  width: 800px;
+  width: 750px;
   height: 200px;
 }
 </style>

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import DataTable from './components/data-table.vue'
-import Sidebar from './components/sidebar.vue'
+import Sidebar from '../common/sidebar.vue'
 </script>
 
 <template>
@@ -17,7 +17,7 @@ import Sidebar from './components/sidebar.vue'
 <style scoped>
 .wrapper {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 }
 </style>

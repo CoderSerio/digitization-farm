@@ -2,6 +2,7 @@
 import { ref, onMounted } from 'vue'
 import InfoCard from './components/info-card.vue'
 import LineChart from './components/line-chart.vue'
+import DatePicker from './components/date-picker.vue'
 </script>
 
 <template>
@@ -10,6 +11,7 @@ import LineChart from './components/line-chart.vue'
       <InfoCard />
     </div>
     <div class="right">
+      <DatePicker />
       <LineChart />
     </div>
   </div>
@@ -18,5 +20,6 @@ import LineChart from './components/line-chart.vue'
 <style scoped>
 .wrapper {
   display: flex;
+  justify-content: space-between;
 }
 </style>
