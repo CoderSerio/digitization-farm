@@ -1,44 +1,43 @@
 <script setup lang="ts">
 import { onMounted, ref, toRefs, watch } from 'vue'
 import * as echarts from 'echarts'
-import {strHandler} from '@/utils/strToArr'
+import { strHandler } from '@/utils/strToArr'
 
 const chartRef = ref<HTMLElement>()
 let chartInstance: any = null
 
-  // 获取图标数据
-  const echatsData = defineProps<{ data: string|undefined }>()
+// 获取图标数据
+const echatsData = defineProps<{ data: string | undefined }>()
 
-    watch(echatsData,(newValue, oldValue)=>{
+watch(echatsData, (newValue, oldValue) => {
+  const humidityListArr = strHandler(newValue.data)
+  console.log(humidityListArr)
+  // 创建图表
+  chartInstance = echarts.init(chartRef.value as HTMLElement)
+  chartInstance.setOption({
+    xAxis: {
+      type: 'category',
+      data: Array(24)
+        .fill(0)
+        .map((_, index) => index + 1)
+    },
+    tooltip: {
+      trigger: 'axis'
+    },
+    yAxis: {
+      type: 'value'
+    },
+    series: [
+      {
+        data: humidityListArr,
+        type: 'line',
+        smooth: true
+      }
+    ]
+  })
+})
 
-      const humidityListArr = strHandler(newValue.data) 
-      console.log(humidityListArr);
-       // 创建图表
-      chartInstance = echarts.init(chartRef.value as HTMLElement)
-      chartInstance.setOption({
-        xAxis: {
-          type: 'category',
-          data: Array(24).fill(0).map((_, index) => index+1)
-        },
-        tooltip: {
-          trigger: 'axis'
-        },
-        yAxis: {
-          type: 'value'
-        },
-        series: [
-          {
-            data: humidityListArr ,
-            type: 'line',
-            smooth: true
-          }
-        ]
-      })
-    })
-
-
-
-  console.log(echatsData.data);
+console.log(echatsData.data)
 
 // onMounted(() => {
 
@@ -88,8 +87,6 @@ let chartInstance: any = null
 //     deep: true
 //   }
 // )
-
-
 </script>
 
 <template>

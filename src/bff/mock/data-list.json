@@ -1,5 +1,7 @@
 {
-  "data":[
+  "msg": "ok",
+  "code": 200,
+  "data": [
     {
       "animalId": 123,
       "species": "猪",
@@ -121,5 +123,4 @@
       "feedLogId": 1
     }
   ]
-  
 }
