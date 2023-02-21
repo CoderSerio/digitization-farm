@@ -1,29 +1,31 @@
 {
-  "animal": {
-    "animalId": 1,
-    "species": "猪",
-    "growthStage": 1,
-    "healthStatus": 1,
-    "farm": "猪场",
-    "feedLogId": 1
-  },
-  "feedLog": {
-    "feedLogId": 1,
-    "date": 20230219,
-    "feedType": "剩饭",
-    "dailyUse": 10
-  },
-  "antibiotic": {
-    "antibioticId": 1,
-    "antibioticName": "抗生素1",
-    "species": "猪",
-    "growthStage": 1,
-    "dose": 20
-  },
-  "farm": {
-    "farmName": "猪场",
-    "date": 20230219,
-    "temperature": "{10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33}",
-    "humidity": "{50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73}"
-  }
+  "data":{
+    "animal": {
+      "animalId": 1,
+      "species": "猪",
+      "growthStage": 1,
+      "healthStatus": 1,
+      "farm": "猪场",
+      "feedLogId": 1
+    },
+    "feedLog": {
+      "feedLogId": 1,
+      "date": 20230219,
+      "feedType": "剩饭",
+      "dailyUse": 10
+    },
+    "antibiotic": {
+      "antibioticId": 1,
+      "antibioticName": "抗生素1",
+      "species": "猪",
+      "growthStage": 1,
+      "dose": 20
+    },
+    "farm": {
+      "farmName": "猪场",
+      "date": 20230219,
+      "temperature": "{10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33}",
+      "humidity": "{50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73}"
+    }
+  }  
 }

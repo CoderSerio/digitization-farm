@@ -29,68 +29,68 @@ app.get('/data-list', (req, res) => {
   const querys = req.url.split('?')?.[1] ?? ''
   // 真实数据，与后端对接时使用
   // TODO: 后面有空封装一下，这样子写太丑了
-  request(
-    {
-      url: `${BE_URL}/selectAll?${querys}`,
-      method: 'POST'
-    },
-    (error: any, response: any, body: any) => {
-      if (error) {
-        throw error
-      } else {
-        console.log('响应体:\n', body)
-        res.send(body)
-      }
-    }
-  )
+  // request(
+  //   {
+  //     url: `${BE_URL}/selectAll?${querys}`,
+  //     method: 'POST'
+  //   },
+  //   (error: any, response: any, body: any) => {
+  //     if (error) {
+  //       throw error
+  //     } else {
+  //       console.log('响应体:\n', body)
+  //       res.send(body)
+  //     }
+  //   }
+  // )
 
   // mock数据，本地开发自测时使用
-  // res.send(mockDataList)
+  res.send(mockDataList)
 })
 
 app.get('/analyse', (req, res) => {
   console.log(`\n${new Date()}, 接收到请求: req.url`)
   const querys = req.url.split('?')?.[1] ?? ''
   // 真实数据，与后端对接时使用
-  request(
-    {
-      url: `${BE_URL}/selectDetail?${querys}`,
-      method: 'POST'
-    },
-    (error: any, response: any, body: any) => {
-      if (error) {
-        throw error
-      } else {
-        console.log('响应体:\n', body)
-        res.send(body)
-      }
-    }
-  )
+  // request(
+  //   {
+  //     url: `${BE_URL}/selectDetail?${querys}`,
+  //     method: 'POST'
+  //   },
+  //   (error: any, response: any, body: any) => {
+  //     if (error) {
+  //       throw error
+  //     } else {
+  //       console.log('响应体:\n', body)
+  //       res.send(body)
+  //     }
+  //   }
+  // )
 
   // mock数据，本地开发自测时使用
-  // res.send(mockAnalyse)
+  res.send(mockAnalyse)
 })
 
 app.get('/warehouse', (req, res) => {
   console.log(`\n${new Date()}, 接收到请求: req.url`)
   const querys = req.url.split('?')?.[1] ?? ''
   // 真实数据，与后端对接时使用
-  request(
-    {
-      url: `${BE_URL}/selectStock?${querys}`,
-      method: 'POST'
-    },
-    (error: any, response: any, body: any) => {
-      if (error) {
-        throw error
-      } else {
-        console.log('响应体:\n', body)
-        res.send(body)
-      }
-    }
-  )
+  // request(
+  //   {
+  //     url: `${BE_URL}/selectStock?${querys}`,
+  //     method: 'POST'
+  //   },
+  //   (error: any, response: any, body: any) => {
+  //     if (error) {
+  //       throw error
+  //     } else {
+  //       console.log('响应体:\n', body)
+  //       res.send(body)
+  //     }
+  //   }
+  // )
 
-  // res.send('暂时还没开发3d的部分')
+  res.send('暂时还没开发3d的部分')
 })
 
 app.listen(BFF_PORT, () => {

@@ -1,52 +1,43 @@
 <script setup lang="ts">
 import router from '@/routes'
+import {GrowthStage,HealthStatus} from '@type/common'
 import { getQueryPair } from '@/utils/url'
-import { onMounted, reactive } from 'vue'
+import { onMounted, reactive ,inject} from 'vue'
 
-const queryPair = reactive<Record<string, string>>({})
+// const queryPair = reactive<Record<string, string>>({})
 
-const onBack = () => {
-  router.replace('/')
-}
+// const onBack = () => {
+//   router.replace('/')
+// }
 
-onMounted(() => {
-  const res = getQueryPair()
-  Object.keys(res).forEach((key) => {
-    queryPair[key] = res[key]
-  })
-})
+// onMounted(() => {
+//   const res = getQueryPair()
+//   Object.keys(res).forEach((key) => {
+//     queryPair[key] = res[key]
+//   })
+// })
+// let data = reactive<Record<string, string>>({})
+
+// onMounted(()=>{
+//   data = inject('listData') || {}
+//   console.log(data,'data')
+// })
+defineProps<{ data: {
+  animal:any,
+  antibiotic:any
+} }>()
+
 </script>
 
 <template>
   <div aria-label="A complete example of page header">
-    <el-page-header @back="onBack">
-      <template #content>
-        <div class="flex items-center">
-          <span class="text-large font-600 mr-3"> 详细信息 </span>
-          <span
-            class="text-sm mr-2"
-            style="color: var(--el-text-color-regular)"
-          >
-          </span>
-          <el-tag> #{{ queryPair?.animalId }} </el-tag>
-        </div>
-      </template>
-
-      <el-descriptions :column="3" size="small" class="mt-4">
-        <el-descriptions-item label="Username"
-          >kooriookami</el-descriptions-item
-        >
-        <el-descriptions-item label="Telephone"
-          >18100000000
-        </el-descriptions-item>
-        <el-descriptions-item label="Place">Suzhou</el-descriptions-item>
-        <el-descriptions-item label="Remarks">
-          <el-tag size="small">School</el-tag>
-        </el-descriptions-item>
-        <el-descriptions-item label="Address">
-          海为什么是蓝色的？ 因为鱼会吐泡泡————blue blue blue~
-        </el-descriptions-item>
-      </el-descriptions>
-    </el-page-header>
+    <el-descriptions class="margin-top" title="详细信息" :column="4" direction="vertical" border>
+      <el-descriptions-item label="品种">{{data?.animal?.species}}</el-descriptions-item>
+      <el-descriptions-item label="养殖场">{{data?.animal?.farm}}</el-descriptions-item>
+      <el-descriptions-item label="将康状况" :span="2">{{ HealthStatus[data?.animal?.healthStatus] }}</el-descriptions-item>
+      <el-descriptions-item label="生长状况">{{ GrowthStage[data?.animal?.growthStage]}}</el-descriptions-item>
+      <el-descriptions-item label="编号">{{data?.animal?.animalId}} </el-descriptions-item>
+      <el-descriptions-item label="抗生素">{{data?.antibiotic?.antibioticName}} </el-descriptions-item>
+    </el-descriptions>
   </div>
 </template>
