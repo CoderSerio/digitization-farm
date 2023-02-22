@@ -3,9 +3,9 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
-    "start-fe": "vite",
+    "start-fe": "vite --open",
     "start-bff": "npx ts-node src/bff/index.ts",
-    "dev": "start.bat dev",
+    "dev": "start.bat dev --open",
     "prod": "start.bat prod",
     "build": "vue-tsc && vite build",
     "format": "prettier --write ."

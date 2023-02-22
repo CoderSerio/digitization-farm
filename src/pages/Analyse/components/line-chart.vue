@@ -97,6 +97,6 @@ console.log(echatsData.data)
 <style scoped>
 #echart {
   width: 750px;
-  height: 200px;
+  height: 300px;
 }
 </style>
