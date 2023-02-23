@@ -43,7 +43,7 @@ function handleClose(key: any, keyPath: any) {
         </span>
       </el-menu-item>
       <!-- TODO: 完成路由 -->
-      <el-menu-item index="3" route="/all">
+      <el-menu-item index="3" route="/overview">
         <el-tooltip
           :disabled="!isCollapse"
           class="item"

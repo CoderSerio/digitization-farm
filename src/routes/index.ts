@@ -21,6 +21,12 @@ const routes: Array<Route> = [
     name: 'WareHouse',
     component: () =>
       import(/* webpackChunkName: "about" */ '@page/WareHouse/index.vue')
+  },
+  {
+    path: '/overview',
+    name: 'overview',
+    component: () =>
+      import(/* webpackChunkName: "about" */ '@page/Overview/index.vue')
   }
 ]
 

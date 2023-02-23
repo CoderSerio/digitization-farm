@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import DataTable from './components/data-table.vue'
-import Sidebar from '../common/sidebar.vue'
 </script>
 
 <template>

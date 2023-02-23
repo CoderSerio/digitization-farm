@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { GrowthStage, HealthStatus } from '@type/common'
-import { watch } from 'fs'
+import { watch } from 'vue'
 
 let data = defineProps<{
   data: {
@@ -10,7 +10,7 @@ let data = defineProps<{
 }>()
 
 watch(
-  data as any,
+  data,
   (newval: any, oldval: any) => {
     data = newval
     console.log(oldval, 'data更新——————————————————')

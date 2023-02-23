@@ -11,9 +11,10 @@ export enum HealthStatus {
   '异常' = 0
 }
 
+export type Species = '猪' | '羊' | '鸡'
 export interface Animal {
   animalId: number
-  species: '猪' | '羊' | '鸡'
+  species: Species
   growthStage: GrowthStage
   healthStatus: HealthStatus
   farm: string
@@ -24,4 +25,11 @@ export interface Route {
   path: string
   name: string
   component: VueElement | (() => Promise<any>)
+}
+
+// 统计，一个物种的数量、健康分布、生长周期分布
+export interface CountItem {
+  num: number
+  growthStage: Record<string, number>
+  healthStatus: Record<string, number>
 }
