@@ -105,7 +105,7 @@ const option = {
   ]
 }
 
-// 获取图标数据
+// 获取图标数据这里
 const echatsData = defineProps<{ data: any | undefined }>()
 
 watch(echatsData, (newValue, oldValue) => {

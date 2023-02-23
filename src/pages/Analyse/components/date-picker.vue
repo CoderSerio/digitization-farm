@@ -7,9 +7,10 @@ let date = ref('')
 
 const handleChange = (date: string) => {
   console.log(date)
-  bus.emit('dateNew',date)
+  const query = getQueryPair()
+  // bus.emit('dateNew',date)
   // TODO: 如果想写动态刷新数据的话，可以把下面这段改掉;不过目前这样子写的话呢，可以写很多事呢~
-  // location.href = `/analyse?animalId=${query?.animalId}&date=${date}`
+  location.href = `/analyse?animalId=${query?.animalId}&date=${date}`
 }
 </script>
 
