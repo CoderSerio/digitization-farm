@@ -13,7 +13,10 @@ function handleClose(key: any, keyPath: any) {
 
 <template>
   <div class="menu">
-    <el-radio-group v-model="isCollapse" style="margin-bottom: 20px">
+    <el-radio-group
+      v-model="isCollapse"
+      style="margin-bottom: 20px; min-width: 100px"
+    >
       <el-radio-button size="small" :label="false">展开</el-radio-button>
       <el-radio-button size="small" :label="true">收起</el-radio-button>
     </el-radio-group>
@@ -82,7 +85,7 @@ function handleClose(key: any, keyPath: any) {
 }
 
 ul {
-  height: calc(100vh - 70px);
+  height: calc(100vh - 150px);
   margin: 0 !important;
 }
 </style>

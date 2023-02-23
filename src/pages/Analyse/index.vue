@@ -1,37 +1,92 @@
 <script setup lang="ts">
-import { onMounted, reactive } from 'vue'
+import { onMounted, reactive, ref } from 'vue'
 import InfoCard from './components/info-card.vue'
 import LineChart from './components/line-chart.vue'
 import DatePicker from './components/date-picker.vue'
+import { useRouter } from 'vue-router'
 import { getAnalyseData } from '@/apis/getData'
 import { getQueryPair } from '@/utils/url'
+import bus from '@/utils/eventBus'
 
+// 请求信息
 const res = reactive<any>({})
-onMounted(async () => {
-  const query = getQueryPair()
-  const flag = await getAnalyseData(query?.animalId, query?.date)
+
+// 用于路由跳转
+const route = useRouter()
+
+// 返回上一级
+function goBack() {
+  route.push('./')
+}
+
+// 获取子组件的传参
+let date = ref('')
+bus.on('dateNew', (res: any) => {
+  date.value = res
+  console.log(date.value, 'ffffffff')
+  // 发起请求
+  getdata()
+})
+
+// 发起请求的方法
+const query = getQueryPair()
+async function getdata() {
+  console.log(query.animalId, date.value)
+  const flag = await getAnalyseData(query?.animalId, date.value)
   Object.keys(flag).forEach((item) => {
     res[item] = flag[item]
   })
+}
+
+// 首次加载请求数据
+onMounted(async () => {
+  getdata()
 })
 </script>
 
 <template>
-  <div class="wrapper">
+  <el-card class="wrapper">
+    <!-- 顶部区域 -->
+    <div class="top">
+      <!-- 返回按钮 -->
+      <img @click="goBack" class="backBtn" src="@/assets/icon_analyse/a4.png" />
+      <!-- 日期选择 -->
+      <DatePicker :data="res" />
+    </div>
+    <!-- 左侧数据区 -->
     <div class="left">
       <InfoCard :data="res" />
     </div>
+    <!-- 右侧图表区 -->
     <div class="right">
-      <DatePicker :data="res" />
       <LineChart :data="res?.farm" />
     </div>
-  </div>
+  </el-card>
 </template>
 
 <style scoped>
 .wrapper {
   width: 100%;
+  margin: 15px;
+  margin-top: 30px;
+}
+.wrapper /deep/ .el-card__body {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+/* 顶部区域 */
+.top {
   display: flex;
   justify-content: space-between;
+  width: 100%;
+}
+
+/* 返回按钮 */
+.backBtn,
+.backBtn :hover {
+  width: 30px;
+  cursor: pointer;
 }
 </style>

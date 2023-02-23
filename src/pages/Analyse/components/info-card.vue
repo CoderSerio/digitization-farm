@@ -11,29 +11,26 @@ defineProps<{
 </script>
 
 <template>
-  <div aria-label="A complete example of page header">
-    <el-descriptions
-      class="margin-top"
-      title="详细信息"
-      :column="4"
-      direction="vertical"
-      border
-    >
+  <div
+    aria-label="A complete example of page header"
+    style="margin-top: 30px; width: 300px"
+  >
+    <el-descriptions class="margin-top" :column="3" direction="vertical" border>
+      <el-descriptions-item label="编号"
+        >{{ data?.animal?.animalId }}
+      </el-descriptions-item>
       <el-descriptions-item label="品种">{{
         data?.animal?.species
       }}</el-descriptions-item>
       <el-descriptions-item label="养殖场">{{
         data?.animal?.farm
       }}</el-descriptions-item>
-      <el-descriptions-item label="将康状况" :span="2">{{
+      <el-descriptions-item label="将康状况">{{
         HealthStatus[data?.animal?.healthStatus]
       }}</el-descriptions-item>
       <el-descriptions-item label="生长状况">{{
         GrowthStage[data?.animal?.growthStage]
       }}</el-descriptions-item>
-      <el-descriptions-item label="编号"
-        >{{ data?.animal?.animalId }}
-      </el-descriptions-item>
       <el-descriptions-item label="抗生素"
         >{{ data?.antibiotic?.antibioticName }}
       </el-descriptions-item>
