@@ -20,22 +20,22 @@ function goBack() {
 }
 
 // 获取子组件的传参
-let date = ref('')
+let date = ref('123')
+const query = getQueryPair()
 bus.on('dateNew', (res: any) => {
   date.value = res
-  console.log(date.value, 'ffffffff')
   // 发起请求
   getdata()
 })
 
 // 发起请求的方法
-const query = getQueryPair()
+
 async function getdata() {
-  console.log(query.animalId, date.value)
   const flag = await getAnalyseData(query?.animalId, date.value)
   Object.keys(flag).forEach((item) => {
     res[item] = flag[item]
   })
+  console.log(res, 'res')
 }
 
 // 首次加载请求数据
@@ -50,6 +50,7 @@ onMounted(async () => {
     <div class="top">
       <!-- 返回按钮 -->
       <img @click="goBack" class="backBtn" src="@/assets/icon_analyse/a4.png" />
+      <div>{{ date }}</div>
       <!-- 日期选择 -->
       <DatePicker :data="res" />
     </div>

@@ -116,6 +116,7 @@ watch(echatsData, (newValue, oldValue) => {
   // 创建图表
   chartInstance = echarts.init(chartRef.value as HTMLElement)
   chartInstance.setOption(option)
+  console.log('图标刷新！！！')
 })
 </script>
 

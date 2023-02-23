@@ -1,12 +1,22 @@
 <script setup lang="ts">
 import { GrowthStage, HealthStatus } from '@type/common'
+import { watch } from 'fs'
 
-defineProps<{
+let data = defineProps<{
   data: {
     animal: any
     antibiotic: any
   }
 }>()
+
+watch(
+  data as any,
+  (newval: any, oldval: any) => {
+    data = newval
+    console.log(oldval, 'data更新——————————————————')
+  },
+  { immediate: true, deep: true }
+)
 </script>
 
 <template>
