@@ -10,7 +10,7 @@ const res = reactive<any>({})
 onMounted(async () => {
   const query = getQueryPair()
   const flag = await getAnalyseData(query?.animalId, query?.date)
-  Object.keys(flag).forEach(item=>{
+  Object.keys(flag).forEach((item) => {
     res[item] = flag[item]
   })
 })
@@ -23,8 +23,7 @@ onMounted(async () => {
     </div>
     <div class="right">
       <DatePicker :data="res" />
-      <LineChart :data="res?.farm?.humidity" />
-      <LineChart :data="res?.farm?.temperature" />
+      <LineChart :data="res?.farm" />
     </div>
   </div>
 </template>
@@ -33,5 +32,6 @@ onMounted(async () => {
 .wrapper {
   display: flex;
   justify-content: space-between;
+  width: auto;
 }
 </style>
