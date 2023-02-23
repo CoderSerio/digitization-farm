@@ -5,12 +5,7 @@ import Sidebar from '../common/sidebar.vue'
 
 <template>
   <div class="wrapper">
-    <div class="left">
-      <Sidebar />
-    </div>
-    <div class="right">
-      <DataTable />
-    </div>
+    <DataTable />
   </div>
 </template>
 

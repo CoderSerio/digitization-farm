@@ -9,12 +9,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="wrapper">
-    <div class="left">
-      <Sidebar />
-    </div>
-    <div class="right">3d部分暂时不做</div>
-  </div>
+  <div class="wrapper">3d部分暂时不做</div>
 </template>
 
 <style scoped>
