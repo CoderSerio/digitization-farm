@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { getWarehouseData } from '@/apis/getData'
-import Sidebar from '@page/Common/sidebar.vue'
 import { onMounted } from 'vue'
 onMounted(async () => {
   const res = await getWarehouseData()

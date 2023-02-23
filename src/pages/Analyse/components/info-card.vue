@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import router from '@/routes'
 import { GrowthStage, HealthStatus } from '@type/common'
 
 defineProps<{
