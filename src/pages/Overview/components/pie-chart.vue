@@ -1,40 +1,57 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import * as echarts from 'echarts'
-import { strHandler } from '@/utils/strToArr'
 
 const chartRef = ref<HTMLElement>()
 let chartInstance: any = null
 
 // 获取图标数据
-const echatsData = defineProps<{ data: string | undefined }>()
+// const echatsData = defineProps<{ data: string | undefined }>()
 
-watch(echatsData, (newValue) => {
-  const humidityListArr = strHandler(newValue.data)
-  // 创建图表
+// watch(echatsData, (newValue) => {
+// 创建图表
+onMounted(async () => {
   chartInstance = echarts.init(chartRef.value as HTMLElement)
   chartInstance.setOption({
-    xAxis: {
-      type: 'category',
-      data: Array(24)
-        .fill(0)
-        .map((_, index) => index + 1)
-    },
     tooltip: {
-      trigger: 'axis'
+      trigger: 'item'
     },
-    yAxis: {
-      type: 'value'
+    legend: {
+      top: '5%',
+      left: 'center'
     },
     series: [
       {
-        data: humidityListArr,
-        type: 'line',
-        smooth: true
+        name: 'Access From',
+        type: 'pie',
+        radius: ['40%', '70%'],
+        avoidLabelOverlap: false,
+        label: {
+          show: false,
+          position: 'center'
+        },
+        emphasis: {
+          label: {
+            show: true,
+            fontSize: 40,
+            fontWeight: 'bold'
+          }
+        },
+        labelLine: {
+          show: false
+        },
+        data: [
+          { value: 1048, name: 'Search Engine' },
+          { value: 735, name: 'Direct' },
+          { value: 580, name: 'Email' },
+          { value: 484, name: 'Union Ads' },
+          { value: 300, name: 'Video Ads' }
+        ]
       }
     ]
   })
 })
+// })
 </script>
 
 <template>

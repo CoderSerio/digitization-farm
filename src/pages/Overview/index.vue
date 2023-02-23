@@ -2,6 +2,7 @@
 import { onMounted } from 'vue'
 import { getTableListData } from '@/apis/getData'
 import { getCntOfSpecies } from '@/utils/count'
+import PieChart from './components/pie-chart.vue'
 
 onMounted(async () => {
   // 发起请求获取列表数据
@@ -11,6 +12,8 @@ onMounted(async () => {
 })
 </script>
 
-<template></template>
+<template>
+  <PieChart></PieChart>
+</template>
 
 <style scoped></style>
