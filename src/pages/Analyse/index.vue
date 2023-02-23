@@ -30,8 +30,8 @@ onMounted(async () => {
 
 <style scoped>
 .wrapper {
+  width: 100%;
   display: flex;
   justify-content: space-between;
-  width: auto;
 }
 </style>

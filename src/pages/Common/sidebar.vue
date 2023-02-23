@@ -73,12 +73,16 @@ function handleClose(key: any, keyPath: any) {
 <style scoped>
 .el-menu-vertical-demo:not(.el-menu--collapse) {
   width: 200px;
-  min-height: 400px;
 }
 
 .menu_icon {
   width: 30px;
   margin-left: 20px;
   margin-right: 20px;
+}
+
+ul {
+  height: calc(100vh - 70px);
+  margin: 0 !important;
 }
 </style>

@@ -2,10 +2,6 @@
 import router from '@/routes'
 import { GrowthStage, HealthStatus } from '@type/common'
 
-const onBack = () => {
-  router.replace('/')
-}
-
 defineProps<{
   data: {
     animal: any
@@ -15,7 +11,6 @@ defineProps<{
 </script>
 
 <template>
-  <el-button @click="onBack">返回</el-button>
   <div aria-label="A complete example of page header">
     <el-descriptions
       class="margin-top"
