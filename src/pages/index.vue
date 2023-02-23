@@ -1,25 +1,17 @@
 <script setup lang="ts">
-import { ref } from 'vue'
 import Sidebar from '@page/Common/sidebar.vue'
-import DataList from '@page/DataList/index.vue'
+import TextEchart from '@page/Common/text-echart.vue'
 
-let isCollapse = ref(false)
-
-function handleOpen(key: any, keyPath: any) {
-  console.log(key, keyPath)
-}
-function handleClose(key: any, keyPath: any) {
-  console.log(key, keyPath)
-}
 defineProps<{ msg: string }>()
 </script>
 
 <template>
-  <!-- <RouterView> </RouterView> -->
-  <!-- 方便测试跳转页面, 后续会根据实际情况选择性溢出 -->
-
   <!-- 头部 -->
-  <div class="head"></div>
+  <div class="head">
+    <div style="width: 200px; height: 100%">
+      <TextEchart text="数字化农场" />
+    </div>
+  </div>
   <div class="body">
     <!-- 菜单栏 -->
     <Sidebar />

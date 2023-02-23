@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref, toRefs, watch } from 'vue'
+import { ref, watch } from 'vue'
 import * as echarts from 'echarts'
 import { strHandler } from '@/utils/strToArr'
 
@@ -7,7 +7,7 @@ const chartRef = ref<HTMLElement>()
 let chartInstance: any = null
 
 const colors = ['#5470C6', '#EE6666', '#EE6666']
-let option = {
+const option = {
   title: {
     text: '当前环境数据'
   },
