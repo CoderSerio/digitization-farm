@@ -20,7 +20,7 @@ function goBack() {
 }
 
 // 获取子组件的传参
-let date = ref('123')
+let date = ref('')
 const query = getQueryPair()
 bus.on('dateNew', (res: any) => {
   date.value = res

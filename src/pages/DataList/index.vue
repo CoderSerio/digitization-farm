@@ -3,9 +3,7 @@ import DataTable from './components/data-table.vue'
 </script>
 
 <template>
-  <div class="wrapper">
-    <DataTable />
-  </div>
+  <DataTable />
 </template>
 
 <style scoped>

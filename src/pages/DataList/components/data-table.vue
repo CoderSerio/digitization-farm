@@ -37,7 +37,7 @@ const handleClick = (index: number, row: Animal) => {
 </script>
 
 <template>
-  <div class="wrapper">
+  <el-card class="wrapper">
     <el-table :data="filterData" style="width: 100%; height: 100%">
       <el-table-column label="编号" prop="animalId" />
 
@@ -130,13 +130,24 @@ const handleClick = (index: number, row: Animal) => {
         </template>
       </el-table-column>
     </el-table>
-  </div>
+  </el-card>
 </template>
 
 <style scoped>
-.wrapper {
-  height: 95vh;
+/* .wrapper {
+  height: 80vh;
   width: 90vw;
   margin: 0;
+} */
+.wrapper {
+  width: 100%;
+  margin: 15px;
+  margin-top: 30px;
+}
+.wrapper /deep/ .el-card__body {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }
 </style>

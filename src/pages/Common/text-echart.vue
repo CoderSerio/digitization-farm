@@ -23,8 +23,8 @@ onMounted(async () => {
             fontWeight: 'bold',
             lineDash: [0, 200],
             lineDashOffset: 0,
-            fill: 'transparent',
-            stroke: '#000',
+            fill: '#fff1',
+            stroke: '#fff',
             lineWidth: 1
           },
           keyframeAnimation: {
@@ -34,7 +34,7 @@ onMounted(async () => {
               {
                 percent: 0.7,
                 style: {
-                  fill: 'transparent',
+                  fill: '#fff3',
                   lineDashOffset: 200,
                   lineDash: [200, 0]
                 }
@@ -42,13 +42,13 @@ onMounted(async () => {
               {
                 percent: 0.8,
                 style: {
-                  fill: 'transparent'
+                  fill: '#fff7'
                 }
               },
               {
                 percent: 1,
                 style: {
-                  fill: 'black'
+                  fill: '#fff'
                 }
               }
             ]
