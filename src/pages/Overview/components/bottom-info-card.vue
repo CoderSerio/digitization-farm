@@ -1,7 +1,7 @@
 <script lang="ts" setup></script>
 
 <template>
-  <el-card class="wrapper"> </el-card>
+  <el-card class="wrapper"></el-card>
 </template>
 
 <style scoped>
@@ -9,6 +9,7 @@
   height: calc(95% - 350px);
   margin: 15px;
 }
+
 .wrapper /deep/ .el-card__body {
   width: 100%;
   display: flex;

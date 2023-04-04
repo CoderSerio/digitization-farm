@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
-    "start-fe": "vite --open",
+    "start-fe": "vite",
     "start-bff": "npx ts-node src/bff/index.ts",
     "dev": "start.bat dev",
     "prod": "start.bat prod",

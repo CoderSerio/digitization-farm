@@ -1,16 +1,15 @@
 <script setup lang="ts">
+import { reactive } from 'vue';
 import DataTable from './components/data-table.vue'
+import ModalForm from './components/modal-form.vue'
+const modalFormData = reactive({ isShow: false })
 </script>
 
 <template>
-  <DataTable />
+  <DataTable :modalFormData="modalFormData" />
+  <div>
+    <ModalForm :data="modalFormData" />
+  </div>
 </template>
 
-<style scoped>
-.wrapper {
-  display: flex;
-  min-width: 80px;
-  justify-content: space-between;
-  align-items: center;
-}
-</style>
+<style scoped></style>

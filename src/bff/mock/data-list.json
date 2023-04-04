@@ -116,6 +116,30 @@
     },
     {
       "animalId": 43,
+      "species": "羊",
+      "growthStage": 2,
+      "healthStatus": 1,
+      "farm": "猪场",
+      "feedLogId": 1
+    },
+    {
+      "animalId": 43,
+      "species": "猪",
+      "growthStage": 1,
+      "healthStatus": 1,
+      "farm": "猪场",
+      "feedLogId": 1
+    },
+    {
+      "animalId": 43,
+      "species": "猪",
+      "growthStage": 1,
+      "healthStatus": 1,
+      "farm": "猪场",
+      "feedLogId": 1
+    },
+    {
+      "animalId": 43,
       "species": "猪",
       "growthStage": 1,
       "healthStatus": 1,
