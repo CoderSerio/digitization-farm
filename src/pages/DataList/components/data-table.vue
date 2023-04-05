@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { getTableListData } from '@/apis/getData'
 import { computed, onMounted, ref, reactive, ComputedRef, Ref } from 'vue'
-import { Animal, GrowthStage, HealthStatus } from '@/types/common'
+import { Animal, GrowthStage, HealthStatus, SpeciesEnum } from '@/types/common'
 import router from '@/routes'
 
 const search = ref('')
@@ -13,31 +13,26 @@ const { modalFormData } = defineProps<{ modalFormData: { isShow: boolean } }>()
 onMounted(async () => {
   // 发起请求获取列表数据
   const res = await getTableListData()
-
   res?.forEach((item: Animal) => {
     tableData.push(item)
   })
   filterData.value = [...tableData]
 })
-
 // 输入搜索筛选
 const handleSearch = () => {
   const tempFilterData: ComputedRef<Array<Animal>> = computed(() =>
     tableData.filter((data: Animal) => {
       const searchStr = search.value?.trim()?.toLowerCase()
-      return !searchStr || data.animalId.toString().includes(searchStr)
+      return !searchStr || data.id.toString().includes(searchStr)
     })
   )
   filterData.value = [...tempFilterData.value]
 }
-
-
 // 点击查看详情
 const handleClick = (index: number, row: Animal) => {
-  console.log(index, row?.animalId)
-  router.push(`/analyse?animalId=${row.animalId}`)
+  console.log(index, row?.id)
+  router.push(`/analyse?id=${row.id}`)
 }
-
 // 删除
 const handleDelete = (index: number, row: Animal) => {
   console.log('删除开发ing')
@@ -53,20 +48,15 @@ const handleAdd = () => {
 <template>
   <el-card class="wrapper">
     <el-table :data="filterData" style="width: 100%; height: 100%;">
-      <el-table-column label="编号" prop="animalId" />
+      <el-table-column label="编号" prop="id" />
 
-      <el-table-column label="物种" prop="species" :filters="[
-        { text: '猪', value: '猪' },
-        { text: '鸡', value: '鸡' },
-        { text: '羊', value: '羊' }
-      ]" :filter-method="(value: string, row: Animal) => value === row.species">
+      <el-table-column label="物种" prop="species">
+        <template #default="scope">
+          {{ SpeciesEnum[scope.row.species] }}
+        </template>
       </el-table-column>
 
-      <el-table-column label="生长周期" prop="growthStage" :filters="[
-        { text: '幼年', value: GrowthStage['幼年'] },
-        { text: '成年', value: GrowthStage['成年'] },
-        { text: '老年', value: GrowthStage['老年'] }
-      ]" :filter-method="(value: GrowthStage, row: Animal) => value === row.growthStage">
+      <el-table-column label="生长周期" prop="growthStage">
         <template #default="scope">
           <el-tag :type="
             (() => {
@@ -83,10 +73,7 @@ const handleAdd = () => {
         </template>
       </el-table-column>
 
-      <el-table-column label="健康状况" prop="healthStatus" :filters="[
-        { text: '正常', value: 1 },
-        { text: '异常', value: 0 }
-      ]" :filter-method="(value: HealthStatus, row: Animal) => value === row.healthStatus">
+      <el-table-column label="健康状况" prop="healthStatus">
         <template #default="scope">
           <el-tag :type="
             (() => {
@@ -95,21 +82,25 @@ const handleAdd = () => {
                   return 'danger'
                 case 1: // 正常
                   return ''
+                default:
+                  return 'warning'
               }
             })()
-          " disable-transitions>{{ HealthStatus[scope.row.healthStatus] }}</el-tag>
+          " disable-transitions>{{ HealthStatus[scope.row.healthStatus] ?? '未知' }}</el-tag>
         </template>
       </el-table-column>
 
       <el-table-column label="饲料" prop="species">
         <template #default="scope">
-          <span>{{ scope.row.species }}饲料</span>
+          <span>{{ SpeciesEnum[scope.row.species] }}饲料</span>
         </template>
       </el-table-column>
 
+      <el-table-column label="每日喂食量(g)" prop="feedNumber" />
+
       <el-table-column label="农场" prop="species">
         <template #default="scope">
-          <span>{{ scope.row.species }}场</span>
+          <span>{{ SpeciesEnum[scope.row.species] }}场</span>
         </template>
       </el-table-column>
 

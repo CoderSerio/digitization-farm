@@ -29,9 +29,8 @@ bus.on('dateNew', (res: any) => {
 })
 
 // 发起请求的方法
-
 async function getdata() {
-  const flag = await getAnalyseData(query?.animalId, date.value)
+  const flag = await getAnalyseData(query?.id, date.value)
   Object.keys(flag).forEach((item) => {
     res[item] = flag[item]
   })
@@ -71,12 +70,14 @@ onMounted(async () => {
   margin: 15px;
   margin-top: 30px;
 }
+
 .wrapper /deep/ .el-card__body {
   width: 100%;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
 }
+
 /* 顶部区域 */
 .top {
   display: flex;

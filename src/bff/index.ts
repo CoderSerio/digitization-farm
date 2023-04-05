@@ -27,7 +27,7 @@ app.get('/', (req, res) => {
 })
 
 app.get('/data-list', (req, res) => {
-  console.log(`\n${new Date()}, 接收到请求: req.url`)
+  console.log(`\n${new Date()}, 接收到请求:${req.url}`)
   const querys = req.url.split('?')?.[1] ?? ''
   // 真实数据，与后端对接时使用
   if (isMock) {
@@ -52,7 +52,7 @@ app.get('/data-list', (req, res) => {
 })
 
 app.get('/analyse', (req, res) => {
-  console.log(`\n${new Date()}, 接收到请求: req.url`)
+  console.log(`\n${new Date()}, 接收到请求:${req.url}`)
   const querys = req.url.split('?')?.[1] ?? ''
   // 真实数据，与后端对接时使用
   if (isMock) {
@@ -77,7 +77,7 @@ app.get('/analyse', (req, res) => {
 })
 
 app.get('/warehouse', (req, res) => {
-  console.log(`\n${new Date()}, 接收到请求: req.url`)
+  console.log(`\n${new Date()}, 接收到请求:${req.url}`)
   const querys = req.url.split('?')?.[1] ?? ''
   // 真实数据，与后端对接时使用
   if (isMock) {
@@ -86,6 +86,56 @@ app.get('/warehouse', (req, res) => {
     request(
       {
         url: `${BE_URL}/selectStock?${querys}`,
+        method: 'POST'
+      },
+      (error: any, response: any, body: any) => {
+        if (error) {
+          throw error
+        } else {
+          console.log('响应体:\n', body)
+          res.send(body)
+        }
+      }
+    )
+  }
+})
+
+// 添加动物个体
+app.get('/add', (req, res) => {
+  console.log(`\n${new Date()}, 接收到请求:${req.url}`)
+  const querys = req.url.split('?')?.[1] ?? ''
+  // 真实数据，与后端对接时使用
+  if (isMock) {
+    res.send('暂无mock数据')
+  } else {
+    request(
+      {
+        url: `${BE_URL}/notes/add?${querys}`,
+        method: 'POST'
+      },
+      (error: any, response: any, body: any) => {
+        if (error) {
+          throw error
+        } else {
+          console.log('响应体:\n', body)
+          res.send(body)
+        }
+      }
+    )
+  }
+})
+
+// 删除动物个体
+app.get('/delete', (req, res) => {
+  console.log(`\n${new Date()}, 接收到请求:${req.url}`)
+  const querys = req.url.split('?')?.[1] ?? ''
+  // 真实数据，与后端对接时使用
+  if (isMock) {
+    res.send('暂时还没开发3d的部分')
+  } else {
+    request(
+      {
+        url: `${BE_URL}/notes/delete?${querys}`,
         method: 'POST'
       },
       (error: any, response: any, body: any) => {

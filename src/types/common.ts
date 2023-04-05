@@ -12,8 +12,14 @@ export enum HealthStatus {
 }
 
 export type Species = '猪' | '羊' | '鸡'
+export enum SpeciesEnum {
+  '猪' = 1,
+  '羊' = 2,
+  '鸡' = 3
+}
+
 export interface Animal {
-  animalId: number
+  id: number
   species: Species
   growthStage: GrowthStage
   healthStatus: HealthStatus

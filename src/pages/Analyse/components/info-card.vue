@@ -10,13 +10,10 @@ defineProps<{
 </script>
 
 <template>
-  <div
-    aria-label="A complete example of page header"
-    style="margin-top: 30px; width: 300px"
-  >
+  <div aria-label="A complete example of page header" style="margin-top: 30px; width: 300px">
     <el-descriptions class="margin-top" :column="3" direction="vertical" border>
       <el-descriptions-item label="编号">
-        {{ data?.animal?.animalId }}
+        {{ data?.animal?.id }}
       </el-descriptions-item>
       <el-descriptions-item label="品种">
         {{ data?.animal?.species }}
@@ -30,8 +27,7 @@ defineProps<{
       <el-descriptions-item label="生长状况">{{
         GrowthStage[data?.animal?.growthStage]
       }}</el-descriptions-item>
-      <el-descriptions-item label="抗生素"
-        >{{ data?.antibiotic?.antibioticName }}
+      <el-descriptions-item label="抗生素">{{ data?.antibiotic?.antibioticName }}
       </el-descriptions-item>
     </el-descriptions>
   </div>

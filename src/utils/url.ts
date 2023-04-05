@@ -4,6 +4,7 @@ interface QueryPair {
 }
 
 // 这个可以抽离，发布成npm包
+// 将Query转为键值对
 export const getQueryPair = (): QueryPair => {
   const url = location.href
   const querys = url.split('?')?.[1] ?? ''
@@ -15,4 +16,11 @@ export const getQueryPair = (): QueryPair => {
     queryPair[k as string] = v
   })
   return queryPair
+}
+
+// 将键值对转为Query
+export const getQuery = (queryPair: Record<string, any>) => {
+  return Object.keys(queryPair)?.reduce((res, key) => {
+    return (res += `${key}=${queryPair[key]}&`)
+  }, '')
 }

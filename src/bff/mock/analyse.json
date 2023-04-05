@@ -3,7 +3,7 @@
   "code": 200,
   "data": {
     "animal": {
-      "animalId": 1,
+      "id": 1,
       "species": "猪",
       "growthStage": 1,
       "healthStatus": 1,

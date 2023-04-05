@@ -44,7 +44,7 @@ const form = reactive({
     <template #footer>
       <span class="dialog-footer">
         <el-button @click="data.isShow = false">取消</el-button>
-        <el-button type="primary">添加</el-button>
+        <el-button @click="" type="primary">确定</el-button>
       </span>
     </template>
   </el-dialog>
