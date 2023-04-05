@@ -34,8 +34,9 @@ const handleClick = (index: number, row: Animal) => {
   router.push(`/analyse?id=${row.id}`)
 }
 // 删除
-const handleDelete = (index: number, row: Animal) => {
-  console.log('删除开发ing')
+const handleDelete = async (index: number, row: Animal) => {
+  await deleteAnimal()
+  // TODO: 还要把数组中的内容移除
 }
 // 新增
 const handleAdd = () => {
@@ -43,6 +44,10 @@ const handleAdd = () => {
   modalFormData.isShow = true
 }
 
+
+function deleteAnimal() {
+  throw new Error('Function not implemented.');
+}
 </script>
 
 <template>
@@ -113,7 +118,11 @@ const handleAdd = () => {
         </template>
         <template #default="scope">
           <el-button size="small" @click="handleClick(scope.$index, scope.row)">查看详情</el-button>
-          <el-button size="small" type="danger" @click="handleDelete(scope.$index, scope.row)">Delete</el-button>
+          <el-popconfirm title="确定要删除吗">
+            <template #reference>
+              <el-button size="small" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+            </template>
+          </el-popconfirm>
         </template>
       </el-table-column>
     </el-table>

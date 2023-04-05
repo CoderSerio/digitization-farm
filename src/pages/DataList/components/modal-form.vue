@@ -1,14 +1,34 @@
 <script lang="ts" setup>
 import { GrowthStage, HealthStatus } from '@/types/common';
-import { reactive, Ref } from 'vue';
+import { ElMessage } from 'element-plus';
+import { reactive, ref, Ref } from 'vue';
 // 控制新增动物个体弹窗的展开和关闭
 const { data } = defineProps<{ data: { isShow: boolean } }>()
+const isLoading = ref(false)
 const form = reactive({
   id: '',
   growth: '',
   healthStatus: '',
   species: '',
 })
+
+// 提交表单
+const submitForm = async () => {
+  const validate = Object.keys(form).some((key) => Boolean((form as any)[key]))
+  if (!validate) {
+    ElMessage({
+      message: '提交失败, 请完整填写表单后重试',
+      type: 'error'
+    })
+  }
+  isLoading.value = true
+  await addAnimal()
+  isLoading.value = false
+}
+
+function addAnimal() {
+  throw new Error('Function not implemented.');
+}
 </script>
 
 <template>
@@ -44,7 +64,7 @@ const form = reactive({
     <template #footer>
       <span class="dialog-footer">
         <el-button @click="data.isShow = false">取消</el-button>
-        <el-button @click="" type="primary">确定</el-button>
+        <el-button @click="submitForm" type="primary">确定</el-button>
       </span>
     </template>
   </el-dialog>
