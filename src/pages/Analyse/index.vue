@@ -30,8 +30,8 @@ bus.on('dateNew', (res: any) => {
 
 // 发起请求的方法
 async function getdata() {
-  const flag = await getAnalyseData(query?.id, date.value)
-  Object.keys(flag).forEach((item) => {
+  const flag = await getAnalyseData(query?.id, date.value) ?? []
+  Object.keys(flag)?.forEach((item) => {
     res[item] = flag[item]
   })
   console.log(res, 'res')

@@ -39,3 +39,11 @@ export interface CountItem {
   growthStage: Record<string, number>
   healthStatus: Record<string, number>
 }
+
+// 表单——增加新的动物个体
+export interface AddingFormData {
+  feedNumber?: number
+  growth?: GrowthStage
+  healthStatus?: HealthStatus
+  species?: SpeciesEnum
+}

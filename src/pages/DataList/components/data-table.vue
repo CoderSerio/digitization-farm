@@ -66,11 +66,11 @@ function deleteAnimal() {
           <el-tag :type="
             (() => {
               switch (scope.row.growthStage) {
-                case 1: // 幼年
+                case '1': // 幼年
                   return 'success'
-                case 2: // 成年
+                case '2': // 成年
                   return ''
-                case 3: // 老年
+                case '3': // 老年
                   return 'warning'
               }
             })()

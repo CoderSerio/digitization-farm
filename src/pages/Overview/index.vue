@@ -19,7 +19,6 @@ onMounted(async () => {
 <template>
   <div class="wrapper">
     <div class="top">
-      <TopInfoCard></TopInfoCard>
       <PieChart :data="cntData"></PieChart>
       <TopInfoCard></TopInfoCard>
     </div>
@@ -33,12 +32,14 @@ onMounted(async () => {
   margin: 15px;
   margin-top: 30px;
 }
+
 .wrapper /deep/ .el-card__body {
   width: 100%;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
 }
+
 .top {
   display: flex;
 }

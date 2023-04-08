@@ -1,48 +1,49 @@
 <script lang="ts" setup>
-import { GrowthStage, HealthStatus } from '@/types/common';
+import { addAnimal } from '@/apis/getData';
+import { AddingFormData, GrowthStage, HealthStatus, SpeciesEnum } from '@/types/common';
 import { ElMessage } from 'element-plus';
 import { reactive, ref, Ref } from 'vue';
 // 控制新增动物个体弹窗的展开和关闭
 const { data } = defineProps<{ data: { isShow: boolean } }>()
 const isLoading = ref(false)
-const form = reactive({
-  id: '',
-  growth: '',
-  healthStatus: '',
-  species: '',
-})
+const form = reactive<AddingFormData>({})
+
+// 表单校验函数
+const validator = () => {
+  const isFilled = Object.keys(form).every((key) => {
+    const value = (form as any)[key]
+    return value === 0 ? true : Boolean(value)
+  })
+  return isFilled
+}
 
 // 提交表单
 const submitForm = async () => {
-  const validate = Object.keys(form).some((key) => Boolean((form as any)[key]))
+  const validate = validator()
   if (!validate) {
     ElMessage({
       message: '提交失败, 请完整填写表单后重试',
       type: 'error'
     })
+    return
   }
+  const { species, healthStatus, growth, feedNumber } = form
   isLoading.value = true
-  await addAnimal()
+  // @ts-ignore 此处能够保证一定有值
+  await addAnimal(species, healthStatus, growth, feedNumber)
   isLoading.value = false
-}
-
-function addAnimal() {
-  throw new Error('Function not implemented.');
 }
 </script>
 
 <template>
   <el-dialog v-model="data.isShow" title="新增动物个体">
     <el-form :model="form">
-      <el-form-item label="编号">
-        <el-input v-model="form.id" autocomplete="off" placeholder="请输入物种编号" />
-      </el-form-item>
 
       <el-form-item label="物种">
         <el-select v-model="form.species" placeholder="请选择物种">
-          <el-option label="猪" value="猪" />
-          <el-option label="牛" value="牛" />
-          <el-option label="羊" value="羊" />
+          <el-option label="猪" :value="SpeciesEnum['猪']" />
+          <el-option label="羊" :value="SpeciesEnum['羊']" />
+          <el-option label="鸡" :value="SpeciesEnum['鸡']" />
         </el-select>
       </el-form-item>
 
@@ -54,8 +55,13 @@ function addAnimal() {
         </el-select>
       </el-form-item>
 
+      <el-form-item label="每日进食量(g)">
+        <el-input v-model="form.feedNumber" placeholder="请输入每日进食量" />
+      </el-form-item>
+
+
       <el-form-item label="健康状况">
-        <el-select v-model="form.healthStatus" placeholder="Please select a zone">
+        <el-select v-model="form.healthStatus" placeholder="请选择健康状况">
           <el-option label="正常" :value="HealthStatus['正常']" />
           <el-option label="异常" :value="HealthStatus['异常']" />
         </el-select>

@@ -1,3 +1,4 @@
+import { Animal, GrowthStage, HealthStatus, SpeciesEnum } from '@/types/common'
 import request from '@/utils/request'
 import { number } from 'echarts'
 
@@ -34,14 +35,19 @@ export const deteleAnimal = async (id: string | number) => {
 }
 
 // 添加动物
-export const addAnimal = async () => {
+export const addAnimal = async (
+  species: keyof SpeciesEnum,
+  healthStatus: HealthStatus,
+  growth: GrowthStage,
+  feedNumber: number
+) => {
   const res = await request.get('/add', {
-    farm: '',
-    feed_log_id: '',
-    feed_number: 1,
-    growth: 1,
-    healthStatus: 1,
-    species: '鸡'
+    farm: '0', // 冗余参数，不用理会
+    feed_log_id: '1', // 同上
+    feed_number: feedNumber,
+    growth,
+    healthStatus,
+    species
   })
   return res.data
 }
