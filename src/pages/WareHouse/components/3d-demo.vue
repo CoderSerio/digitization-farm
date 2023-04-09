@@ -5,10 +5,11 @@
 <script lang="ts" setup>
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
+// @ts-ignore 这是一个service worker，用于处理射线计算
+import RayComputeWorker from '@/utils/worker.ts?worker'
 import { onMounted } from 'vue'
 // 超级炫酷的模型加载器
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
-
 
 //创建一个三维场景
 const scene = new THREE.Scene()
@@ -27,10 +28,8 @@ scene.add(light2)
 const width = window.innerWidth - 100,
   height = window.innerHeight,
   camera = new THREE.PerspectiveCamera(45, width / height, 1, 1000)
-
 //设置相机位置
 camera.position.set(20, 30, 20)
-
 //设置相机方向
 camera.lookAt(0, 0, 0)
 
@@ -38,46 +37,26 @@ camera.lookAt(0, 0, 0)
 const axesHelper = new THREE.AxesHelper(10)
 scene.add(axesHelper)
 
-//创建一个物体（形状）
-// const geometry = new THREE.BoxGeometry(100, 100, 100)
-
-// //创建材质（外观）
-// const material = new THREE.MeshLambertMaterial({
-//   color: 0x00ffff, //设置材质颜色
-//   transparent: true, //开启透明度
-//   opacity: 0.5 //设置透明度
-// })
-// //创建一个网格模型对象
-// const mesh = new THREE.Mesh(geometry, material)
-
-// //把网格模型添加到三维场景
-// scene.add(mesh)
-
 // 3d模型导入
 // 根据观察，一个模型可以分为多个组件，我们需要给每个组件赋予不同的纹理
 // 比如这里4个纹理，我们就猜测应该有4个组件，那么就需要遍历4次
-const texture3 = new THREE.TextureLoader().load('');
-const texture4 = new THREE.TextureLoader().load('');
-
-
-
-
 const texture1 = new THREE.TextureLoader().load('');
 const texture2 = new THREE.TextureLoader().load('');
+const texture3 = new THREE.TextureLoader().load('');
+const texture4 = new THREE.TextureLoader().load('');
 
 const loader = new THREE.ImageLoader();
 loader.setCrossOrigin("Anonymous");  // 解决跨域问题
 
-
 const gltfLoader = new GLTFLoader()
 gltfLoader.load('src/assets/3d_model/demo1/scene.gltf', (gltf) => {
+  // 模型
   const model = gltf.scene
   //遍历模型每部分
   let index = 0
 
   model.traverse((child) => {
     if (child instanceof THREE.Mesh) {
-      // 当取模等于0的时候赋予纹理2
       switch (index % 4) {
         case 0:
           child.material.map = texture1
@@ -97,24 +76,8 @@ gltfLoader.load('src/assets/3d_model/demo1/scene.gltf', (gltf) => {
       index++
     }
   })
-
-  // model.traverse((obj) => {
-  //   //将图片作为纹理加载
-  //   let explosionTexture = new THREE.TextureLoader().load(
-  //     'src/assets/3d_model/demo1/textures/Clothes_emissive.png'
-  //   )
-  //   //调整纹理图的方向
-  //   explosionTexture.flipY = false
-  //   //将纹理图生成基础网格材质(MeshBasicMaterial)
-  //   const material = new THREE.MeshBasicMaterial({
-  //     map: explosionTexture,
-  //   })
-  //   //给模型每部分上材质
-  //   obj.material = material
-  // })
   scene.add(model)
 })
-
 
 //创建一个WebGL渲染器
 const renderer = new THREE.WebGLRenderer()
@@ -127,7 +90,34 @@ controls.addEventListener('change', () => {
   renderer.render(scene, camera)
 })
 
+// 点击事件处理——向量发射器
+const meshArr: Array<any> = []
+const pointer = new THREE.Vector2();
+const meshOnClick = (event: any) => {
+  let raycaster = new THREE.Raycaster();
+  pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
+  pointer.y = - (event.clientY / window.innerHeight) * 2 + 1;
+  raycaster.setFromCamera(pointer, camera);
+  scene.children?.forEach((child) => {
+    if (child.isObject3D) {
+      meshArr.push(child)
+    }
+  })
+  const intersects = raycaster.intersectObjects(meshArr)
+  //被射线穿过的几何体为一个集合，越排在前面说明其位置离端点越近，所以直接取[0]
+  if (intersects.length > 0) {
+    console.log(intersects[0].object);
+  }
+}
+
+
+const rayComputeWorker = new RayComputeWorker()
+
 onMounted(() => {
+
+  // 创建物体点击事件
+  document.addEventListener('click', meshOnClick);
+  // 将物体挂载
   document.getElementById('three')?.appendChild(renderer.domElement)
 })
 

@@ -32,7 +32,6 @@ const toggle = () => {
           <RouterLink to="/">禽畜数据</RouterLink>
         </span>
       </el-menu-item>
-      <!-- TODO: 完成路由 -->
       <el-menu-item index="3" route="/overview">
         <el-tooltip :disabled="!isCollapse" class="item" effect="dark" content="总览概况" placement="right">
           <img class="menu_icon" src="@/assets/icon_menu/a2.png" />

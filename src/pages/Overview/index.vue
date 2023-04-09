@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref, Ref } from 'vue'
+import { onMounted, reactive, ref, Ref } from 'vue'
 import { getTableListData } from '@/apis/getData'
 import { getCntOfSpecies } from '@/utils/count'
 import PieChart from './components/pie-chart.vue'
@@ -8,6 +8,7 @@ import TopInfoCard from './components/top-info-card.vue'
 import { CountItem } from '@/types/common'
 
 const cntData: Ref<Record<string, CountItem>> = ref({})
+const activeSpecie = reactive({ name: '' })
 
 onMounted(async () => {
   // 分类统计
@@ -19,10 +20,10 @@ onMounted(async () => {
 <template>
   <div class="wrapper">
     <div class="top">
-      <PieChart :data="cntData"></PieChart>
-      <TopInfoCard></TopInfoCard>
+      <PieChart :data="cntData" :activeSpecie="activeSpecie"></PieChart>
+      <TopInfoCard :data="cntData" :activeSpecie="activeSpecie"></TopInfoCard>
     </div>
-    <BottomInfoCard></BottomInfoCard>
+    <BottomInfoCard :data="cntData" :activeSpecie="activeSpecie"></BottomInfoCard>
   </div>
 </template>
 

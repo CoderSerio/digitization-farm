@@ -2,7 +2,7 @@
 import { addAnimal } from '@/apis/getData';
 import { AddingFormData, GrowthStage, HealthStatus, SpeciesEnum } from '@/types/common';
 import { ElMessage } from 'element-plus';
-import { reactive, ref, Ref } from 'vue';
+import { reactive } from 'vue';
 // 控制新增动物个体弹窗的展开和关闭
 const { data } = defineProps<{ data: { isShow: boolean } }>()
 // const isLoading = ref(false)

@@ -1,19 +1,23 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 import * as echarts from 'echarts'
-import { CountItem } from '@/types/common'
+import { CountItem, SpeciesEnum } from '@/types/common'
 
 const chartRef = ref<HTMLElement>()
 let chartInstance: any = null
 
 // 获取图标数据
-const props = defineProps<{ data: Record<string, CountItem> }>()
+const props = defineProps<{
+  data: Record<string, CountItem>,
+  activeSpecie: { name: string }
+}>()
 
 watch(props, (newValue, oldValue) => {
   console.log(props)
   chartInstance = echarts.init(chartRef.value as HTMLElement)
-  chartInstance.on('click', (value: any, a: any) => {
-    console.log(value, a)
+  chartInstance.on('click', (value: any) => {
+    // 获取当前点击的是动物名称
+    props.activeSpecie.name = value?.name
   })
   chartInstance.setOption({
     title: {
@@ -48,7 +52,7 @@ watch(props, (newValue, oldValue) => {
         },
         data: Object.keys(props.data ?? [])?.map((key) => {
           return {
-            name: key,
+            name: SpeciesEnum[+key],
             value: props.data[key].num
           }
         })
