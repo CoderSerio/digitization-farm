@@ -1,8 +1,9 @@
 <script lang="ts" setup>
-import { getTableListData } from '@/apis/getData'
+import { getTableListData, deleteAnimal } from '@/apis/getData'
 import { computed, onMounted, ref, reactive, ComputedRef, Ref } from 'vue'
-import { Animal, GrowthStage, HealthStatus, SpeciesEnum } from '@/types/common'
+import { Animal, GrowthStage, HealthStatus, SpeciesEnum, } from '@/types/common'
 import router from '@/routes'
+import { ElMessage } from 'element-plus';
 
 const search = ref('')
 const tableData: Array<Animal> = reactive([])
@@ -35,33 +36,35 @@ const handleClick = (index: number, row: Animal) => {
 }
 // 删除
 const handleDelete = async (index: number, row: Animal) => {
-  await deleteAnimal()
-  // TODO: 还要把数组中的内容移除
+  try {
+    await deleteAnimal(row?.id)
+  } catch (err) {
+    ElMessage({
+      message: '提交失败, 网络异常',
+      type: 'error'
+    })
+  }
+  location.reload()
 }
 // 新增
 const handleAdd = () => {
-  console.log(modalFormData)
   modalFormData.isShow = true
 }
 
-
-function deleteAnimal() {
-  throw new Error('Function not implemented.');
-}
 </script>
 
 <template>
   <el-card class="wrapper">
-    <el-table :data="filterData" style="width: 100%; height: 100%;">
-      <el-table-column label="编号" prop="id" />
+    <el-table :data="filterData" style="width: 100%; height: 80vh; ">
+      <el-table-column label="编号" prop="id" width="160" />
 
-      <el-table-column label="物种" prop="species">
+      <el-table-column label="物种" prop="species" width="160">
         <template #default="scope">
           {{ SpeciesEnum[scope.row.species] }}
         </template>
       </el-table-column>
 
-      <el-table-column label="生长周期" prop="growthStage">
+      <el-table-column label="生长周期" prop="growthStage" width="160">
         <template #default="scope">
           <el-tag :type="
             (() => {
@@ -78,7 +81,7 @@ function deleteAnimal() {
         </template>
       </el-table-column>
 
-      <el-table-column label="健康状况" prop="healthStatus">
+      <el-table-column label="健康状况" prop="healthStatus" width="140">
         <template #default="scope">
           <el-tag :type="
             (() => {
@@ -95,15 +98,15 @@ function deleteAnimal() {
         </template>
       </el-table-column>
 
-      <el-table-column label="饲料" prop="species">
+      <el-table-column label="饲料" prop="species" width="140">
         <template #default="scope">
           <span>{{ SpeciesEnum[scope.row.species] }}饲料</span>
         </template>
       </el-table-column>
 
-      <el-table-column label="每日喂食量(g)" prop="feedNumber" />
+      <el-table-column label="每日喂食量(g)" prop="feedNumber" width="140" />
 
-      <el-table-column label="农场" prop="species">
+      <el-table-column label="农场" prop="species" width="80">
         <template #default="scope">
           <span>{{ SpeciesEnum[scope.row.species] }}场</span>
         </template>
@@ -113,8 +116,10 @@ function deleteAnimal() {
 
       <el-table-column fixed="right" align="right">
         <template #header>
-          <el-button type="primary" @click="handleAdd()">新增</el-button>
-          <el-input v-model="search" size="small" @input="handleSearch()" placeholder="请输入编号进行搜索" />
+          <div class="table-header">
+            <el-input v-model="search" @input="handleSearch()" placeholder="请输入编号搜索" />
+            <el-button type="primary" @click="handleAdd()">新增</el-button>
+          </div>
         </template>
         <template #default="scope">
           <el-button size="small" @click="handleClick(scope.$index, scope.row)">查看详情</el-button>
@@ -148,5 +153,11 @@ function deleteAnimal() {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+}
+
+.table-header {
+  display: flex;
+  justify-content: space-around;
+  gap: 10px;
 }
 </style>

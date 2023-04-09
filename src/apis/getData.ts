@@ -26,7 +26,7 @@ export const getWarehouseData: any = async () => {
   return res.data
 }
 // 删除动物
-export const deteleAnimal = async (id: string | number) => {
+export const deleteAnimal = async (id: string | number) => {
   if (!id) {
     throw Error('getAnalyseData方法缺少必要参数id')
   }

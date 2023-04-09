@@ -5,7 +5,7 @@ import { ElMessage } from 'element-plus';
 import { reactive, ref, Ref } from 'vue';
 // 控制新增动物个体弹窗的展开和关闭
 const { data } = defineProps<{ data: { isShow: boolean } }>()
-const isLoading = ref(false)
+// const isLoading = ref(false)
 const form = reactive<AddingFormData>({})
 
 // 表单校验函数
@@ -28,10 +28,18 @@ const submitForm = async () => {
     return
   }
   const { species, healthStatus, growth, feedNumber } = form
-  isLoading.value = true
-  // @ts-ignore 此处能够保证一定有值
-  await addAnimal(species, healthStatus, growth, feedNumber)
-  isLoading.value = false
+  try {
+    // @ts-ignore 此处能够保证一定有值
+    await addAnimal(species, healthStatus, growth, feedNumber)
+  } catch (error) {
+    ElMessage({
+      message: '提交失败, 网络异常',
+      type: 'error'
+    })
+  } finally {
+    data.isShow = false
+  }
+  location.reload()
 }
 </script>
 
@@ -70,7 +78,7 @@ const submitForm = async () => {
     <template #footer>
       <span class="dialog-footer">
         <el-button @click="data.isShow = false">取消</el-button>
-        <el-button @click="submitForm" type="primary">确定</el-button>
+        <el-button @click="submitForm()" type="primary">确定</el-button>
       </span>
     </template>
   </el-dialog>

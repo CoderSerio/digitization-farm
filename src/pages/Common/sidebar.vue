@@ -22,22 +22,10 @@ const toggle = () => {
       <div :class="['toggle-btn-text', isCollapse ? '' : 'rotate']">></div>
     </el-button>
 
-    <el-menu
-      router="true"
-      default-active="2"
-      class="el-menu-vertical-demo"
-      @open="handleOpen"
-      @close="handleClose"
-      :collapse="isCollapse"
-    >
+    <el-menu router="true" default-active="2" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose"
+      :collapse="isCollapse">
       <el-menu-item index="2" route="/">
-        <el-tooltip
-          :disabled="!isCollapse"
-          class="item"
-          effect="dark"
-          content="禽畜数据"
-          placement="right"
-        >
+        <el-tooltip :disabled="!isCollapse" class="item" effect="dark" content="禽畜数据" placement="right">
           <img class="menu_icon" src="@/assets/icon_menu/a1.png" />
         </el-tooltip>
         <span>
@@ -46,29 +34,17 @@ const toggle = () => {
       </el-menu-item>
       <!-- TODO: 完成路由 -->
       <el-menu-item index="3" route="/overview">
-        <el-tooltip
-          :disabled="!isCollapse"
-          class="item"
-          effect="dark"
-          content="总览概况"
-          placement="right"
-        >
+        <el-tooltip :disabled="!isCollapse" class="item" effect="dark" content="总览概况" placement="right">
           <img class="menu_icon" src="@/assets/icon_menu/a2.png" />
         </el-tooltip>
         <span> 总览概况 </span>
       </el-menu-item>
       <el-menu-item index="4" route="/warehouse">
-        <el-tooltip
-          :disabled="!isCollapse"
-          class="item"
-          effect="dark"
-          content="仓库数据"
-          placement="right"
-        >
+        <el-tooltip :disabled="!isCollapse" class="item" effect="dark" content="仓库数据" placement="right">
           <img class="menu_icon" src="@/assets/icon_menu/a3.png" />
         </el-tooltip>
         <span>
-          <RouterLink to="/warehouse">仓库数据</RouterLink>
+          <RouterLink to="/warehouse" keep>仓库数据</RouterLink>
         </span>
       </el-menu-item>
     </el-menu>
@@ -94,6 +70,7 @@ ul {
 .menu {
   position: relative;
 }
+
 .toggle-btn {
   width: 20px;
   height: 50px;
