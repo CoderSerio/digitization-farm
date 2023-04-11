@@ -13,7 +13,6 @@ const props = defineProps<{
 }>()
 
 watch(props, (newValue, oldValue) => {
-  console.log(props)
   chartInstance = echarts.init(chartRef.value as HTMLElement)
   chartInstance.on('click', (value: any) => {
     // 获取当前点击的是动物名称
@@ -63,12 +62,23 @@ watch(props, (newValue, oldValue) => {
 </script>
 
 <template>
-  <div id="echart" ref="chartRef"></div>
+  <div class="wrapper">
+    <div id="echart" ref="chartRef"></div>
+    <div>{{ props.activeSpecie.name }}</div>
+  </div>
 </template>
 
 <style scoped>
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 300px;
+}
+
 #echart {
   width: 350px;
-  height: 350px;
+  height: 35vh;
 }
 </style>

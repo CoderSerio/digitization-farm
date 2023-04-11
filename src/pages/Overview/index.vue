@@ -8,7 +8,7 @@ import TopInfoCard from './components/top-info-card.vue'
 import { CountItem } from '@/types/common'
 
 const cntData: Ref<Record<string, CountItem>> = ref({})
-const activeSpecie = reactive({ name: '' })
+const activeSpecie = reactive({ name: '鸡' })
 
 onMounted(async () => {
   // 分类统计
@@ -30,8 +30,8 @@ onMounted(async () => {
 <style scoped>
 .wrapper {
   width: 98%;
-  margin: 15px;
-  margin-top: 30px;
+  margin: 10px;
+  margin-top: 10px;
 }
 
 .wrapper /deep/ .el-card__body {
@@ -43,5 +43,6 @@ onMounted(async () => {
 
 .top {
   display: flex;
+  align-items: center;
 }
 </style>
