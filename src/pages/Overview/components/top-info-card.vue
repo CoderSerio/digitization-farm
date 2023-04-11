@@ -69,7 +69,7 @@ watch(props, () => {
 <template>
   <el-card class="wrapper">
     <!-- <div>{{ props.activeSpecie.name }}</div>
-                                                                                                  <div>{{ props.data }}</div> -->
+                                                                                                      <div>{{ props.data }}</div> -->
     <div id="echart1" ref="chartRef1"></div>
     <div id="echart2" ref="chartRef2"></div>
   </el-card>
@@ -78,7 +78,7 @@ watch(props, () => {
 <style scoped>
 .wrapper {
   flex: 1;
-  height: 240px;
+  height: 280px;
   width: 100%;
 }
 
@@ -91,6 +91,6 @@ watch(props, () => {
 #echart1,
 #echart2 {
   width: 300px;
-  height: 240px;
+  height: 280px;
 }
 </style>
