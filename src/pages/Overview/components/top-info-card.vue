@@ -10,6 +10,8 @@ const props = defineProps<{
   activeSpecie: { name: string }
 }>()
 
+
+
 // 产生配置
 const getOption = (title: string, data: Array<Record<string, any>>) => {
   return {
@@ -26,7 +28,7 @@ const getOption = (title: string, data: Array<Record<string, any>>) => {
     },
     series: [
       {
-        name: 'Access From',
+        name: '',
         type: 'pie',
         radius: '50%',
         data: data,
@@ -48,16 +50,16 @@ watch(props, () => {
   const chartInstance1 = echarts.init(chartRef1.value as HTMLElement)
   // 健康状况分布
   const chartInstance2 = echarts.init(chartRef2.value as HTMLElement)
-  const data1 = Object.keys(target?.growthStage).map((key) => {
+  const data1 = Object.keys(target?.growthStage ?? {})?.map((key) => {
     return {
-      name: GrowthStage[key as any],
-      value: target.growthStage[key]
+      name: GrowthStage?.[key as any],
+      value: target.growthStage?.[key]
     }
   })
-  const data2 = Object.keys(target?.healthStatus).map((key) => {
+  const data2 = Object.keys(target?.healthStatus ?? {})?.map((key) => {
     return {
-      name: HealthStatus[key as any],
-      value: target.healthStatus[key]
+      name: HealthStatus?.[key as any],
+      value: target.healthStatus?.[key]
     }
   })
 

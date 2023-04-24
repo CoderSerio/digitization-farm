@@ -66,8 +66,7 @@ const handleAdd = () => {
 
       <el-table-column label="生长周期" prop="growthStage" width="160">
         <template #default="scope">
-          <el-tag :type="
-            (() => {
+          <el-tag :type="(() => {
               switch (scope.row.growthStage) {
                 case '1': // 幼年
                   return 'success'
@@ -77,14 +76,13 @@ const handleAdd = () => {
                   return 'warning'
               }
             })()
-          " disable-transitions>{{ GrowthStage[scope.row.growthStage] }}</el-tag>
+            " disable-transitions>{{ GrowthStage[scope.row.growthStage] }}</el-tag>
         </template>
       </el-table-column>
 
       <el-table-column label="健康状况" prop="healthStatus" width="140">
         <template #default="scope">
-          <el-tag :type="
-            (() => {
+          <el-tag :type="(() => {
               switch (scope.row.healthStatus) {
                 case 0: // 异常
                   return 'danger'
@@ -94,7 +92,7 @@ const handleAdd = () => {
                   return 'warning'
               }
             })()
-          " disable-transitions>{{ HealthStatus[scope.row.healthStatus] ?? '未知' }}</el-tag>
+            " disable-transitions>{{ HealthStatus[scope.row.healthStatus] ?? '未知' }}</el-tag>
         </template>
       </el-table-column>
 
@@ -123,9 +121,9 @@ const handleAdd = () => {
         </template>
         <template #default="scope">
           <el-button size="small" @click="handleClick(scope.$index, scope.row)">查看详情</el-button>
-          <el-popconfirm title="确定要删除吗">
+          <el-popconfirm title="确定要删除吗" @confirm="handleDelete(scope.$index, scope.row)">
             <template #reference>
-              <el-button size="small" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+              <el-button size="small" type="danger">删除</el-button>
             </template>
           </el-popconfirm>
         </template>

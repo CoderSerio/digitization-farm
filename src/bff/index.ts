@@ -4,13 +4,16 @@ const request = require('request')
 // mock数据，和后端对接后移除
 import mockDataList from './mock/data-list.json'
 import mockAnalyse from './mock/analyse.json'
+import { getQuery, getQueryPair } from './utils'
 
 // 配置聚合层（不要改动，如果无法启动请检查3000端口是否被占用）
 const app = express()
 const BFF_PORT = 3000
 
 // TODO: 配置后端的地址和端口，这里需要根据实际情况进行改动
-const BE_URL = 'http://47.107.66.1:8088/'
+const BE_URL = 'http://43.139.80.148:8080'
+const BE_URL2 = 'http://43.139.80.148:8081'
+
 // 不走mock就改一下这个
 const isMock = false
 
@@ -22,12 +25,15 @@ app.all('*', function (req, res, next) {
   next()
 })
 
+// 测试
 app.get('/', (req, res) => {
   res.send('Hello world')
 })
 
+// 查看数据列表
 app.get('/data-list', (req, res) => {
   console.log(`\n${new Date()}, 接收到请求:${req.url}`)
+  console.log('响应体:\n', req.body)
   const querys = req.url.split('?')?.[1] ?? ''
   // 真实数据，与后端对接时使用
   if (isMock) {
@@ -51,9 +57,16 @@ app.get('/data-list', (req, res) => {
   }
 })
 
+// 查看数据分析
 app.get('/analyse', (req, res) => {
   console.log(`\n${new Date()}, 接收到请求:${req.url}`)
-  const querys = req.url.split('?')?.[1] ?? ''
+  console.log('响应体:\n', req.body)
+  // const querys = req.url.split('?')?.[1] ?? ''
+  const queryPairs = getQueryPair(req.url)
+  const querys = getQuery({
+    ...queryPairs,
+    animalId: queryPairs?.id
+  })
   // 真实数据，与后端对接时使用
   if (isMock) {
     // mock数据，本地开发自测时使用
@@ -61,7 +74,8 @@ app.get('/analyse', (req, res) => {
   } else {
     request(
       {
-        url: `${BE_URL}/selectDetail?${querys}`,
+        // 参考后端的url格式 'localhost:8088/'
+        url: `${BE_URL2}/selectDetail?${querys}`,
         method: 'POST'
       },
       (error: any, response: any, body: any) => {
@@ -76,8 +90,10 @@ app.get('/analyse', (req, res) => {
   }
 })
 
+// 查询仓库数据
 app.get('/warehouse', (req, res) => {
   console.log(`\n${new Date()}, 接收到请求:${req.url}`)
+  console.log('响应体:\n', req.body)
   const querys = req.url.split('?')?.[1] ?? ''
   // 真实数据，与后端对接时使用
   if (isMock) {
@@ -103,6 +119,7 @@ app.get('/warehouse', (req, res) => {
 // 添加动物个体
 app.get('/add', (req, res) => {
   console.log(`\n${new Date()}, 接收到请求:${req.url}`)
+  console.log('响应体:\n', req.body)
   const querys = req.url.split('?')?.[1] ?? ''
   // 真实数据，与后端对接时使用
   if (isMock) {
@@ -128,6 +145,7 @@ app.get('/add', (req, res) => {
 // 删除动物个体
 app.get('/delete', (req, res) => {
   console.log(`\n${new Date()}, 接收到请求:${req.url}`)
+  console.log('响应体:\n', req.body)
   const querys = req.url.split('?')?.[1] ?? ''
   // 真实数据，与后端对接时使用
   if (isMock) {

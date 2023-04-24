@@ -5,8 +5,7 @@ interface QueryPair {
 
 // 这个可以抽离，发布成npm包
 // 将Query转为键值对
-export const getQueryPair = (): QueryPair => {
-  const url = location.href
+export const getQueryPair = (url = location.href): QueryPair => {
   const querys = url.split('?')?.[1] ?? ''
   const queryArr = querys.split('&') ?? []
   const queryPair: QueryPair = {}

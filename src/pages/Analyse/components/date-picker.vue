@@ -2,13 +2,13 @@
 import { ref } from 'vue'
 import router from '@/routes'
 import { getQueryPair } from '@/utils/url'
-import bus from '@/utils/eventBus'
+// import bus from '@/utils/eventBus'
 let date = ref('')
 
-const handleChange = (date: string) => {
-  console.log(date)
+const handleChange = () => {
+  console.log('??', date.value)
   const query = getQueryPair()
-  location.href = `/analyse?id=${query?.id}&date=${date}`
+  location.href = `/analyse?id=${query?.id}&date=${date.value}`
 }
 </script>
 

@@ -2,6 +2,7 @@
 import { getWarehouseData } from '@/apis/getData'
 import { onMounted } from 'vue'
 import Demo from './components/3d-demo.vue'
+import Model from './components/3d-model.vue'
 
 onMounted(async () => {
   const res = await getWarehouseData()
@@ -11,7 +12,8 @@ onMounted(async () => {
 
 <template>
   <div class="wrapper">
-    <Demo></Demo>
+    <!-- <Demo></Demo> -->
+    <Model></Model>
   </div>
 </template>
 

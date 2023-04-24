@@ -17,7 +17,7 @@ export const getAnalyseData: any = async (id: string, date: string = '') => {
     throw Error('getAnalyseData方法缺少必要参数id')
   }
   const res = await request.get('/analyse', { id, date })
-  return res.data
+  return res?.data
 }
 
 // 获得仓库信息（3D模型部分）

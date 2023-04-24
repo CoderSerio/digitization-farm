@@ -44,8 +44,8 @@ const submitForm = async () => {
 </script>
 
 <template>
-  <el-dialog v-model="data.isShow" title="新增动物个体">
-    <el-form :model="form">
+  <el-dialog v-model="data.isShow" title="新增动物个体" width="400px">
+    <el-form :model="form" label-width="100px">
 
       <el-form-item label="物种">
         <el-select v-model="form.species" placeholder="请选择物种">

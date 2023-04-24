@@ -30,7 +30,7 @@ bus.on('dateNew', (res: any) => {
 
 // 发起请求的方法
 async function getdata() {
-  const flag = await getAnalyseData(query?.id, date.value) ?? []
+  const flag = await getAnalyseData(query?.id, query?.date) ?? []
   Object.keys(flag)?.forEach((item) => {
     res[item] = flag[item]
   })
@@ -49,9 +49,8 @@ onMounted(async () => {
     <div class="top">
       <!-- 返回按钮 -->
       <img @click="goBack" class="backBtn" src="@/assets/icon_analyse/a4.png" />
-      <div>{{ date }}</div>
       <!-- 日期选择 -->
-      <DatePicker :data="res" />
+      <DatePicker :data="date" />
     </div>
     <!-- 左侧数据区 -->
     <div class="left">
